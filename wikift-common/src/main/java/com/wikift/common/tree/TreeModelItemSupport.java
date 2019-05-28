@@ -15,28 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.enums;
+package com.wikift.common.tree;
+
+import lombok.Data;
+import lombok.ToString;
 
 /**
- * 排序枚举
- *
- * @author qianmoQ
+ * <p> TreeModelItemSupport </p>
+ * <p> Description : TreeModelItemSupport </p>
+ * <p> Author : qianmoQ </p>
+ * <p> Version : 1.0 </p>
+ * <p> Create Time : 2019-05-28 18:12 </p>
+ * <p> Author Email: <a href="mailTo:shichengoooo@163.com">qianmoQ</a> </p>
  */
-public enum OrderEnums {
+@Data
+@ToString
+public class TreeModelItemSupport {
 
-    FABULOU("COUNT(uafr.uafr_user_id)"),
-    VIEW("SUM(uavr.uavr_view_count)"),
+    private Long phrase;
 
-    NATIVE_CREATE_TIME("a_create_time");
-
-    private String value;
-
-    OrderEnums(String value) {
-        this.value = value;
+    private TreeModelItemSupport() {
     }
 
-    public String getValue() {
-        return this.value;
+    public static TreeModelItemSupport buildNew() {
+        return new TreeModelItemSupport();
     }
 
 }

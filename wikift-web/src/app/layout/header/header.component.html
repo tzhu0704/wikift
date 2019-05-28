@@ -87,10 +87,10 @@
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
           <div class="row app-shortcuts">
-            <a class="col-4 app-shortcuts__item" [routerLink]="['/article/create']">
-              <i class="zmdi zmdi-file-text bg-blue"></i>
-              <small class="">写文章</small>
-            </a>
+            <!--<a class="col-4 app-shortcuts__item" [routerLink]="['/article/create']">-->
+            <!--<i class="zmdi zmdi-file-text bg-blue"></i>-->
+            <!--<small class="">写文章</small>-->
+            <!--</a>-->
             <a class="col-4 app-shortcuts__item" [routerLink]="['/space']">
               <i class="zmdi zmdi-assignment bg-teal"></i>
               <small class="">专栏/空间</small>
@@ -164,18 +164,18 @@
         <div class="modal-body">
           <table class="table">
             <tbody>
-              <tr>
-                <th scope="row">消息标题:</th>
-                <td>{{remind?.title}}</td>
-              </tr>
-              <tr>
-                <th scope="row">消息内容:</th>
-                <td>{{remind?.content}}</td>
-              </tr>
-              <tr>
-                <th scope="row">提醒时间:</th>
-                <td>{{remind?.createTime | date:'yyyy年MM月dd日HH:mm:ss'}}</td>
-              </tr>
+            <tr>
+              <th scope="row">消息标题:</th>
+              <td>{{remind?.title}}</td>
+            </tr>
+            <tr>
+              <th scope="row">消息内容:</th>
+              <td>{{remind?.content}}</td>
+            </tr>
+            <tr>
+              <th scope="row">提醒时间:</th>
+              <td>{{remind?.createTime | date:'yyyy年MM月dd日HH:mm:ss'}}</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -194,11 +194,13 @@
         <form #emailForm="ngForm" (ngSubmit)="settingEmail()">
           <div class="modal-body">
             <div class="form-group form-group--float form-group--centered">
-              <input type="text" disabled [(ngModel)]="userInfo.username" [ngModelOptions]="{standalone: true}" class="form-control" required
-                placeholder="请输入用户名" />
+              <input type="text" disabled [(ngModel)]="userInfo.username" [ngModelOptions]="{standalone: true}"
+                     class="form-control" required
+                     placeholder="请输入用户名"/>
             </div>
             <div class="form-group form-group--float form-group--centered">
-              <input type="email" [(ngModel)]="userInfo.email" name="email" #email="ngModel" email class="form-control" required placeholder="请输入用户邮箱"
+              <input type="email" [(ngModel)]="userInfo.email" name="email" #email="ngModel" email class="form-control"
+                     required placeholder="请输入用户邮箱"
               />
               <p class="text-danger" *ngIf="email.errors?.email">邮箱地址不正确</p>
             </div>
@@ -221,25 +223,30 @@
         <div class="modal-header border-b-1">
           <h5 class="modal-title pull-left">您正在修改 {{userInfo.username}} 的密码</h5>
         </div>
-        <form *ngIf="!showEmailAlert; else pleaseSettingEmail" #passwordForm="ngForm" (ngSubmit)="changerPasswordRevice()">
+        <form *ngIf="!showEmailAlert; else pleaseSettingEmail" #passwordForm="ngForm"
+              (ngSubmit)="changerPasswordRevice()">
           <div class="modal-body">
             <div class="form-group form-group--float form-group--centered">
-              <input type="text" disabled [(ngModel)]="userInfo.username" [ngModelOptions]="{standalone: true}" class="form-control" required
-                placeholder="请输入用户名" />
+              <input type="text" disabled [(ngModel)]="userInfo.username" [ngModelOptions]="{standalone: true}"
+                     class="form-control" required
+                     placeholder="请输入用户名"/>
             </div>
             <div class="form-group form-group--float form-group--centered">
-              <input type="email" [(ngModel)]="changerPasswordUserInfo.email" name="email" #email="ngModel" email class="form-control"
-                required placeholder="请输入用户邮箱" />
+              <input type="email" [(ngModel)]="changerPasswordUserInfo.email" name="email" #email="ngModel" email
+                     class="form-control"
+                     required placeholder="请输入用户邮箱"/>
               <p class="text-danger" *ngIf="email.errors?.email">邮箱地址不正确</p>
             </div>
             <div class="form-group form-group--float form-group--centered">
-              <input type="password" [(ngModel)]="changerPasswordUserInfo.password" name="password" #password="ngModel" [rangeLength]="[8, 20]"
-                class="form-control" required placeholder="请输入用户原密码" />
+              <input type="password" [(ngModel)]="changerPasswordUserInfo.password" name="password" #password="ngModel"
+                     [rangeLength]="[8, 20]"
+                     class="form-control" required placeholder="请输入用户原密码"/>
               <p class="text-danger" *ngIf="password.errors?.rangeLength">密码不能少于8位, 且不能大于20位</p>
             </div>
             <div class="form-group form-group--float form-group--centered">
-              <input type="password" [(ngModel)]="changerPasswordUserInfo.repassword" name="repassword" #repassword="ngModel" [rangeLength]="[8, 20]"
-                class="form-control" required placeholder="请输入用户需要修改的密码" />
+              <input type="password" [(ngModel)]="changerPasswordUserInfo.repassword" name="repassword"
+                     #repassword="ngModel" [rangeLength]="[8, 20]"
+                     class="form-control" required placeholder="请输入用户需要修改的密码"/>
               <p class="text-danger" *ngIf="repassword.errors?.rangeLength">密码不能少于8位, 且不能大于20位</p>
             </div>
           </div>

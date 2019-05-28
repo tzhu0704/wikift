@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.enums;
+package com.wikift.model.enums;
 
 public enum MessageEnums {
 
@@ -38,6 +38,11 @@ public enum MessageEnums {
     USER_PASSWORD_INPUT_ERROR(5002, "用户原密码输入错误"),
     USER_PASSWORD_INPUT_SAME(5003, "用户原密码不能与修改密码相同"),
     USER_NOT_FOUND(5004, "用户不存在"),
+
+    /**
+     * 空间相关提示
+     */
+    SPACE_NOT_FOUND(5100, "空间未找到,请校验传递参数的有效性"),
 
     UNSUPPORT_MEDIA_TYPE(4415, "不支持的数据类型");
 

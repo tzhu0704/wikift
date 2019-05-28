@@ -36,7 +36,6 @@ import {NavigationTriggerComponent} from './header/navigation-trigger/navigation
 
 import {UserService} from '../../services/user.service';
 import {RemindService} from '../../services/remind.service';
-import {SpaceLayoutModule} from "./space/space.layout.module";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -62,7 +61,6 @@ export function busyConfigFactory() {
     FormsModule,
     BusyModule,
     CustomFormsModule,
-    SpaceLayoutModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     ButtonsModule.forRoot(),

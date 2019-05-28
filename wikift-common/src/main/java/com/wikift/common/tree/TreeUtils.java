@@ -15,19 +15,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.utils;
+package com.wikift.common.tree;
 
-import com.wikift.model.enums.MessageEnums;
+import java.util.List;
 
 /**
- * 提示消息工具类
- *
- * @author qianmoQ
+ * <p> TreeUtils </p>
+ * <p> Description : TreeUtils </p>
+ * <p> Author : qianmoQ </p>
+ * <p> Version : 1.0 </p>
+ * <p> Create Time : 2019-05-28 17:01 </p>
+ * <p> Author Email: <a href="mailTo:shichengoooo@163.com">qianmoQ</a> </p>
  */
-public class MessageUtils {
+public class TreeUtils {
 
-    public static String getParamNotNull(String alertName) {
-        return String.format("param %s" + MessageEnums.PARAMS_NOT_NULL.getValue(), alertName);
+    public static List<TreeModelSupport> getChildren(Long id, List datas) {
+        return null;
     }
 
 }

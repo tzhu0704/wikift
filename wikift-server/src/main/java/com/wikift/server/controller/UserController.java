@@ -17,7 +17,7 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import com.wikift.common.utils.BeanUtils;
 import com.wikift.common.utils.ShaUtils;
 import com.wikift.model.result.CommonResult;

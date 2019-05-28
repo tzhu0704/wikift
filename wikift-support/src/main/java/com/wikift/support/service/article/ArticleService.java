@@ -1,8 +1,9 @@
 package com.wikift.support.service.article;
 
-import com.wikift.common.enums.OrderEnums;
+import com.wikift.model.enums.OrderEnums;
 import com.wikift.model.article.ArticleEntity;
 import com.wikift.model.counter.CounterEntity;
+import com.wikift.model.result.CommonResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -33,7 +34,14 @@ public interface ArticleService {
      */
     Page<ArticleEntity> findAll(OrderEnums order, Pageable pageable);
 
-    Page<ArticleEntity> getAllArticleBySpace(Long spaceId, Pageable pageable);
+    /**
+     * 根据空间查询当前空间所有文章列表
+     *
+     * @param code     当前空间编码
+     * @param pageable 分页信息
+     * @return 当前空间所有文章列表
+     */
+    CommonResult getAllArticleBySpace(String code, Pageable pageable);
 
     Page<ArticleEntity> getMyArticles(Long userId, Pageable pageable);
 

@@ -17,7 +17,7 @@
  */
 package com.wikift.model.result;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

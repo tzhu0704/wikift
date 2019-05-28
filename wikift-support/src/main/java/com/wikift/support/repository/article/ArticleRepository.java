@@ -38,7 +38,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
      * @param pageable 分页信息
      * @return 文章列表
      */
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -61,7 +61,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
      * @param pageable 分页信息
      * @return 文章列表
      */
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -83,7 +83,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
      * @param pageable 分页信息
      * @return 文章列表
      */
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -105,7 +105,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
      * @param pageable 分页信息
      * @return 文章列表
      */
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -123,7 +123,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
             nativeQuery = true)
     Page<ArticleEntity> findAllByTagAndCreateTime(Long tagId, Pageable pageable);
 
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -140,7 +140,7 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
             nativeQuery = true)
     Page<ArticleEntity> findAllToUserAndCreateTime(@Param(value = "userId") Long userId, Pageable pageable);
 
-    @Query(value = "SELECT a.a_id, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
+    @Query(value = "SELECT a.a_id, a.parent, a.a_title, a.a_content, a.a_create_time, IFNULL(SUM(uavr.uavr_view_count) , 0) AS view_count, IFNULL(COUNT(DISTINCT uafr.uafr_user_id), 0) AS fabulou_count, uar.uar_user_id, atr.atr_article_type_id, sar.sar_space_id, IFNULL(c.comments_count, 0) AS comments_count " +
             "FROM article AS a " +
             "LEFT OUTER JOIN users_article_relation AS uar ON a.a_id = uar.uar_article_id " +
             "LEFT OUTER JOIN article_type_relation AS atr ON a.a_id = atr.atr_article_id " +
@@ -186,6 +186,14 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
      * @return 当前空间下所有的文章列表
      */
     Page<ArticleEntity> findAllBySpace(SpaceEntity space, Pageable pageable);
+
+    /**
+     * 根据空间信息查询当前空间下所有的文章列表
+     *
+     * @param space 空间标志
+     * @return 当前空间下所有的文章列表
+     */
+    Iterable<ArticleEntity> findAllBySpace(SpaceEntity space);
 
     /**
      * 根据用户和时间查询文章信息

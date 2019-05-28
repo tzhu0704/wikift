@@ -45,6 +45,7 @@
         <module>wikift-design</module>
         <module>wikift-script</module>
         <module>wikift-admin</module>
+        <module>wikift-test</module>
     </modules>
 
     <!-- url -->
@@ -196,6 +197,11 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-commons</artifactId>
                 <version>${spring.data.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>4.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

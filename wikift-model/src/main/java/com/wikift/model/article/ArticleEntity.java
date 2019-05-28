@@ -62,7 +62,7 @@ public class ArticleEntity {
     @Size(min = 10)
     private String content;
 
-    private Integer parent; // 父级节点
+    private Long parent; // 父级节点
 
     @Column(name = "a_create_time")
     @CreatedDate

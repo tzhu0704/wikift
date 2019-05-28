@@ -17,7 +17,9 @@
  */
 package com.wikift.common.utils;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
+import com.wikift.model.result.CommonResult;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -61,6 +63,20 @@ public class ValidateUtils {
      */
     public static MessageEnums extractNull() {
         return MessageEnums.PARAMS_NOT_NULL;
+    }
+
+    /**
+     * 校验参数是否为空
+     *
+     * @param object  校验的参数
+     * @param message 回显的数据
+     * @return 校验状态
+     */
+    public static CommonResult validateEmpty(Object object, MessageEnums message) {
+        if (ObjectUtils.isEmpty(object)) {
+            return CommonResult.error(message);
+        }
+        return CommonResult.success();
     }
 
 }

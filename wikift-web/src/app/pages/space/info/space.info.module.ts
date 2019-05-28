@@ -15,58 +15,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { PopoverModule } from 'ngx-bootstrap/popover';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {PopoverModule} from 'ngx-bootstrap/popover';
+import {TreeNgxModule} from 'tree-ngx';
 
-import { BusyModule, BusyConfig } from 'angular2-busy';
-import { WikiftEditorModule } from '../../../shared/directives/wikift-editor/wikift-editor.module';
+import {BusyConfig, BusyModule} from 'angular2-busy';
+import {WikiftEditorModule} from '../../../shared/directives/wikift-editor/wikift-editor.module';
 
-import { SpaceInfoComponent } from './space.info.component';
+import {SpaceInfoComponent} from './space.info.component';
 
-import { ArticleService } from '../../../../services/article.service';
-import { SpaceService } from '../../../../services/space.service';
+import {ArticleService} from '../../../../services/article.service';
+import {SpaceService} from '../../../../services/space.service';
+import {CommentService} from "../../../../services/comment.service";
 
 export function busyConfigFactory() {
-    return new BusyConfig({
-        message: '数据加载中, 请稍候...',
-        backdrop: true,
-    });
+  return new BusyConfig({
+    message: '数据加载中, 请稍候...',
+    backdrop: true,
+  });
 }
 
 const SPACE_INFO_ROUTES: Routes = [
-    { path: '', component: SpaceInfoComponent }
+  {path: '', component: SpaceInfoComponent}
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        BusyModule,
-        WikiftEditorModule,
-        TooltipModule.forRoot(),
-        TabsModule.forRoot(),
-        PaginationModule.forRoot(),
-        PopoverModule.forRoot(),
-        RouterModule.forChild(SPACE_INFO_ROUTES)
-    ],
-    exports: [],
-    declarations: [
-        SpaceInfoComponent
-    ],
-    providers: [
-        ArticleService,
-        SpaceService,
-        {
-            provide: BusyConfig,
-            useFactory: busyConfigFactory
-        }
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    BusyModule,
+    WikiftEditorModule,
+    TreeNgxModule,
+    TooltipModule.forRoot(),
+    TabsModule.forRoot(),
+    PaginationModule.forRoot(),
+    PopoverModule.forRoot(),
+    RouterModule.forChild(SPACE_INFO_ROUTES)
+  ],
+  exports: [],
+  declarations: [
+    SpaceInfoComponent
+  ],
+  providers: [
+    ArticleService,
+    SpaceService,
+    CommentService,
+    {
+      provide: BusyConfig,
+      useFactory: busyConfigFactory
+    }
+  ],
 })
-export class SpaceInfoModule { }
+export class SpaceInfoModule {
+}

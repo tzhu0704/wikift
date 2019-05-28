@@ -17,7 +17,7 @@
  */
 package com.wikift.support.service.user;
 
-import com.wikift.common.enums.RoleEnums;
+import com.wikift.model.enums.RoleEnums;
 import com.wikift.common.utils.CalendarUtils;
 import com.wikift.model.article.ArticleEntity;
 import com.wikift.model.role.RoleEntity;
@@ -28,13 +28,11 @@ import com.wikift.support.repository.role.RoleRepository;
 import com.wikift.support.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {

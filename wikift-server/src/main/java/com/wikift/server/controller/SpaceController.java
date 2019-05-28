@@ -73,16 +73,10 @@ public class SpaceController {
 
     @PreAuthorize("hasAuthority(('USER'))")
     @RequestMapping(value = "space/article", method = RequestMethod.GET)
-    CommonResult<SpaceEntity> getAllArticleBySpace(@RequestParam(value = "page", defaultValue = "0") Integer page,
+    public CommonResult<SpaceEntity> getAllArticleBySpace(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                    @RequestParam(value = "size", defaultValue = "10") Integer size,
                                                    @RequestParam(value = "spaceCode") String spaceCode) {
-        Assert.notNull(spaceCode, MessageUtils.getParamNotNull("spaceCode"));
-        SpaceEntity space = spaceService.getSpaceInfoByCode(spaceCode);
-        if (!ObjectUtils.isEmpty(space)) {
-            return CommonResult.success(articleService.getAllArticleBySpace(space.getId(), PageAndSortUtils.getPage(page, size)));
-        } else {
-            return CommonResult.success(space);
-        }
+        return articleService.getAllArticleBySpace(spaceCode, PageAndSortUtils.getPage(page, size));
     }
 
     @PreAuthorize("hasAuthority(('USER'))")

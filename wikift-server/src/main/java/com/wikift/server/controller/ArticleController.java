@@ -17,8 +17,8 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.common.enums.MessageEnums;
-import com.wikift.common.enums.OrderEnums;
+import com.wikift.model.enums.MessageEnums;
+import com.wikift.model.enums.OrderEnums;
 import com.wikift.common.utils.MessageUtils;
 import com.wikift.common.utils.PageAndSortUtils;
 import com.wikift.job.async.RamindAsyncJob;

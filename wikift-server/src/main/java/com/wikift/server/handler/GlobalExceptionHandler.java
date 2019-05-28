@@ -17,7 +17,7 @@
  */
 package com.wikift.server.handler;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import com.wikift.common.utils.ValidateUtils;
 import com.wikift.model.result.CommonResult;
 import org.springframework.http.converter.HttpMessageNotReadableException;

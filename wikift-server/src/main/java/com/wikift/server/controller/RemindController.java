@@ -17,7 +17,7 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import com.wikift.model.remind.RemindEntity;
 import com.wikift.model.result.CommonResult;
 import com.wikift.model.user.UserEntity;

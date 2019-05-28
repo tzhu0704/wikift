@@ -31,7 +31,10 @@ const LAYOUT_ROUTES: Routes = [
   },
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
-      {path: 'article/create', loadChildren: '../pages/article/create/create.article.module#CreateArticleModule'},
+      {
+        path: ':space/article/create',
+        loadChildren: '../pages/article/create/create.article.module#CreateArticleModule'
+      },
       {path: 'article/:id/editor', loadChildren: '../pages/article/editor.article.module#EditorArticleModule'},
       {
         path: 'article/:id/history/:articleHistoryVersion/contrast',
