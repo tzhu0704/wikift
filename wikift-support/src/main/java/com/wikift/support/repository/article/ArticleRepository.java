@@ -18,6 +18,7 @@
 package com.wikift.support.repository.article;
 
 import com.wikift.model.article.ArticleEntity;
+import com.wikift.model.space.SpaceEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -175,7 +176,16 @@ public interface ArticleRepository extends PagingAndSortingRepository<ArticleEnt
             "ORDER BY SUM(uavr.uavr_view_count) DESC \n#pageable\n",
             countQuery = "SELECT COUNT(a.a_id) FROM article AS a",
             nativeQuery = true)
-    Page<ArticleEntity> findAllBySpace(@Param(value = "spaceId") Long spaceId, Pageable pageable);
+    Page<ArticleEntity> findAllBySpace(@Param("spaceId") Long spaceId, Pageable pageable);
+
+    /**
+     * 根据空间信息查询当前空间下所有的文章列表
+     *
+     * @param space    空间标志
+     * @param pageable 分页信息
+     * @return 当前空间下所有的文章列表
+     */
+    Page<ArticleEntity> findAllBySpace(SpaceEntity space, Pageable pageable);
 
     /**
      * 根据用户和时间查询文章信息

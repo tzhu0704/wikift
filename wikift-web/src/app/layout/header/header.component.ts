@@ -15,24 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalDirective } from 'ngx-bootstrap/modal';
-import { Subscription } from 'rxjs/Subscription';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ToastyService } from 'ng2-toasty';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {Subscription} from 'rxjs/Subscription';
+import {FormGroup} from '@angular/forms';
+import {ToastyService} from 'ng2-toasty';
 
-import { CookieUtils } from '../../shared/utils/cookie.util';
+import {CookieUtils} from '../../shared/utils/cookie.util';
 
-import { SharedService } from '../../shared/services/shared.service';
-import { UserService } from '../../../services/user.service';
+import {SharedService} from '../../shared/services/shared.service';
+import {UserService} from '../../../services/user.service';
 
-import { UserParamModel } from '../../shared/model/param/user.param.model';
-import { CommonConfig } from '../../../config/common.config';
-import { RemindService } from '../../../services/remind.service';
-import { CodeConfig } from '../../../config/code.config';
-import { ResultUtils } from '../../shared/utils/result.util';
-import { UserModel } from '../../shared/model/user/user.model';
+import {UserParamModel} from '../../shared/model/param/user.param.model';
+import {CommonConfig} from '../../../config/common.config';
+import {RemindService} from '../../../services/remind.service';
+import {CodeConfig} from '../../../config/code.config';
+import {ResultUtils} from '../../shared/utils/result.util';
 
 @Component({
   selector: 'app-header',
@@ -71,10 +70,10 @@ export class HeaderComponent implements OnInit {
   }
 
   constructor(private sharedService: SharedService,
-    private router: Router,
-    private userService: UserService,
-    private remindService: RemindService,
-    private toastyService: ToastyService) {
+              private router: Router,
+              private userService: UserService,
+              private remindService: RemindService,
+              private toastyService: ToastyService) {
     sharedService.maThemeSubject.subscribe((value) => {
       this.maThemeModel = value;
     });

@@ -16,120 +16,142 @@
   limitations under the License.
 -->
 <section class="content--row">
-    <div class="content__inner">
-        <!-- 工具栏 -->
-        <div class="toolbar">
-            <div class="toolbar__label">
-                <div *ngIf="space" class="media">
-                    <div class="media-body">
-                        <div class="user-sm">
-                            <!-- 空间详细信息 -->
-                            <template #spaceDetail>
-                                <div class="article__user__info mr-auto">
-                                    <img class="article__user__img" src="{{space.avatar}}" alt="{{space.name}}" [popover]="spaceDetail" triggers="mouseenter:mouseleave"
-                                        placement="right">
-                                    <div class="article__user__name mr-center">
-                                        <strong>{{space.name}}</strong>
-                                        <p>{{space.description? space.description: '该空间还没有任何描述'}}</p>
-                                    </div>
-                                </div>
-                            </template>
-                            <!-- 空间基本信息 -->
-                            <div class="article__user__info mr-auto">
-                                <img class="article__user__img" src="{{space.avatar}}" alt="{{space.name}}" [popover]="spaceDetail" triggers="mouseenter:mouseleave"
-                                    container="body" placement="right">
-                                <div class="article__user__name">
-                                    {{space.name}}
-                                </div>
-                                <div *ngIf="articleCount" class="article__user__name" style="margin-left: 10px;">
-                                    共有{{articleCount}}文章
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="content__inner">
+    <!-- 工具栏 -->
+    <div class="toolbar">
+      <div class="toolbar__label">
+        <div *ngIf="space" class="media">
+          <div class="media-body">
+            <div class="user-sm">
+              <!-- 空间详细信息 -->
+              <template #spaceDetail>
+                <div class="article__user__info mr-auto">
+                  <img class="article__user__img" src="{{space.avatar}}" alt="{{space.name}}" [popover]="spaceDetail"
+                       triggers="mouseenter:mouseleave"
+                       placement="right">
+                  <div class="article__user__name mr-center">
+                    <strong>{{space.name}}</strong>
+                    <p>{{space.description ? space.description : '该空间还没有任何描述'}}</p>
+                  </div>
                 </div>
+              </template>
+              <!-- 空间基本信息 -->
+              <div class="article__user__info mr-auto">
+                <img class="article__user__img" src="{{space.avatar}}" alt="{{space.name}}" [popover]="spaceDetail"
+                     triggers="mouseenter:mouseleave"
+                     container="body" placement="right">
+                <div class="article__user__name">
+                  {{space.name}}
+                </div>
+                <div *ngIf="articleCount" class="article__user__name" style="margin-left: 10px;">
+                  共有{{articleCount}}文章
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- 文章内容 -->
-        <div class="col-md-9">
-            <tabset>
-                <div [ngBusy]="loadArticleBusy"></div>
-                <tab heading="最新文章">
-                </tab>
-            </tabset>
-            <div *ngFor="let article of articles" class="card">
-                <!-- 文章用户信息 -->
-                <div class="card-header border-b-1 px-4 py-3">
-                    <div class="card-block d-flex py-3">
-                        <div class="mr-auto">
-                            <h5>
-                                <a [routerLink]="['/article/info', article.id]">{{ article?.title }}</a>
-                                <span *ngIf="(currentDay| date:'yyyyMMdd') === (article.createTime | date:'yyyyMMdd')" class="badge badge-pill badge-danger">新</span>
-                                <span *ngIf="article.articleType.id === 1" class="badge badge-pill badge-success">原</span>
-                                <span *ngIf="article.articleType.id === 2" class="badge badge-pill badge-info">转</span>
-                            </h5>
-                        </div>
-                        <!-- 文章PV -->
-                        <div class="ml-4">
-                            <button type="button" class="btn btn-success btn-sm" tooltip="该文章共有{{article.viewCount}}次访问" container="body" placement="bottom">
+      </div>
+    </div>
+    <div class="row">
+      <!-- 文章树形菜单列表开始 -->
+      <div class="col-md-2">
+        <tabset>
+          <div [ngBusy]="loadArticleDirectoryTree"></div>
+          <tab heading="文章目录"></tab>
+        </tabset>
+      </div>
+      <!-- 文章树形菜单列表结束 -->
+      <!-- 文章内容 -->
+      <div class="col-md-9">
+        <tabset>
+          <div [ngBusy]="loadArticleBusy"></div>
+          <tab heading="最新文章">
+          </tab>
+        </tabset>
+        <div *ngFor="let article of articles" class="card">
+          <!-- 文章用户信息 -->
+          <div class="card-header border-b-1 px-4 py-3">
+            <div class="card-block d-flex py-3">
+              <div class="mr-auto">
+                <h5>
+                  <a [routerLink]="['/article/info', article.id]">{{ article?.title }}</a>
+                  <span *ngIf="(currentDay| date:'yyyyMMdd') === (article.createTime | date:'yyyyMMdd')"
+                        class="badge badge-pill badge-danger">新</span>
+                  <span *ngIf="article.articleType.id === 1" class="badge badge-pill badge-success">原</span>
+                  <span *ngIf="article.articleType.id === 2" class="badge badge-pill badge-info">转</span>
+                </h5>
+              </div>
+              <!-- 文章PV -->
+              <div class="ml-4">
+                <button type="button" class="btn btn-success btn-sm" tooltip="该文章共有{{article.viewCount}}次访问"
+                        container="body" placement="bottom">
                                 <span>
                                     <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                     <span>{{article.viewCount}}</span>
                                 </span>
-                            </button>
-                        </div>
+                </button>
+              </div>
+            </div>
+            <div *ngIf="article.user" class="media">
+              <div class="media-body">
+                <div class="user-sm">
+                  <div class="article__user__info">
+                    <img class="article__user__img" src="{{ article.user.avatar }}" alt="{{ article.user.username }}">
+                    <div class="article__user__name">
+                      <a [routerLink]="['/account', article.user.username, 'info']">{{ article.user.username }}</a>
+                      - {{ article.createTime | date:'yyyy年MM月dd日HH:mm:ss'
+                      }} 发布
                     </div>
-                    <div *ngIf="article.user" class="media">
-                        <div class="media-body">
-                            <div class="user-sm">
-                                <div class="article__user__info">
-                                    <img class="article__user__img" src="{{ article.user.avatar }}" alt="{{ article.user.username }}">
-                                    <div class="article__user__name">
-                                        <a [routerLink]="['/account', article.user.username, 'info']">{{ article.user.username }}</a> - {{ article.createTime | date:'yyyy年MM月dd日HH:mm:ss'
-                                        }} 发布
-                                    </div>
-                                    <!-- 文章标签 -->
-                                    <div class="card-block ml-10">
-                                        <span *ngFor="let articleTag of article.articleTags" class="badge badge-success ml-2">{{articleTag.title}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- 文章标签 -->
+                    <div class="card-block ml-10">
+                    <span *ngFor="let articleTag of article.articleTags"
+                          class="badge badge-success ml-2">{{articleTag.title}}</span>
                     </div>
+                  </div>
                 </div>
-                <!-- 文章内容信息 -->
-                <div class="card-body border-b-1">
-                    <p class="mb-0">
-                        <wikift-editor id="editormd-{{article.id}}" markdown="{{article.content| slice: 0:100}}" [preview]="'true'"></wikift-editor>
-                    </p>
-                </div>
-                <!-- 文章附属信息 -->
-                <div class="card-footer d-flex px-4 py-3">
-                    <div class="mr-auto">
-                        <button type="button" class="btn btn-secondary btn-sm disabled" tooltip="该文章共有{{article.fabulouCount}}位用户赞" container="body"
-                            placement="bottom">
+              </div>
+            </div>
+          </div>
+          <!-- 文章内容信息 -->
+          <div class="card-body border-b-1">
+            <p class="mb-0">
+              <wikift-editor id="editormd-{{article.id}}" markdown="{{article.content| slice: 0:100}}"
+                             [preview]="'true'"></wikift-editor>
+            </p>
+          </div>
+          <!-- 文章附属信息 -->
+          <div class="card-footer d-flex px-4 py-3">
+            <div class="mr-auto">
+              <button type="button" class="btn btn-secondary btn-sm disabled"
+                      tooltip="该文章共有{{article.fabulouCount}}位用户赞"
+                      container="body"
+                      placement="bottom">
                             <span>
                                 <i class="zmdi zmdi-thumb-up zmdi-hc-fw"></i>
                                 <span>{{article.fabulouCount}}</span>
                             </span>
-                        </button>
-                    </div>
-                    <div class="ml-4">
-                        <button type="button" class="btn btn-secondary btn-sm disabled" tooltip="该文章共有{{article.commentsCount}}条评论" container="body"
-                            placement="bottom">
+              </button>
+            </div>
+            <div class="ml-4">
+              <button type="button" class="btn btn-secondary btn-sm disabled"
+                      tooltip="该文章共有{{article.commentsCount}}条评论"
+                      container="body"
+                      placement="bottom">
                             <span>
                                 <i class="zmdi zmdi-comments zmdi-hc-fw"></i>
                                 <span>{{article.commentsCount}}</span>
                             </span>
-                        </button>
-                    </div>
-                </div>
+              </button>
             </div>
-            <div class="mr-center">
-                <pagination *ngIf="articles?.length && page" [(ngModel)]="currentPage" totalItems="{{page.totalElements}}" maxSize="{{page.size}}"
-                    (pageChanged)="pageChanged($event)" [boundaryLinks]="true">
-                </pagination>
-            </div>
+          </div>
         </div>
+        <div class="mr-center">
+          <pagination *ngIf="articles?.length && page" [(ngModel)]="currentPage" totalItems="{{page.totalElements}}"
+                      maxSize="{{page.size}}"
+                      (pageChanged)="pageChanged($event)" [boundaryLinks]="true">
+          </pagination>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

@@ -1,0 +1,149 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+  <p>
+  http://www.apache.org/licenses/LICENSE-2.0
+  <p>
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<main class="main main--alt" [attr.data-ma-theme]="maTheme">
+  <header class="header">
+    <div class="header__logo">
+      <h1>
+        <a [routerLink]="['/']">Wikift</a>
+      </h1>
+    </div>
+    <!-- 工具栏 -->
+    <ul class="top-nav">
+      <ng-container *ngIf="token; else noAuth">
+        <!-- 个人消息 -->
+        <li dropdown [autoClose]="false" triggers="mouseover">
+          <a dropdownToggle [ngClass]="{'top-nav__notify': reminds?.length}">
+            <i class="zmdi zmdi-email"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+            <div class="listview listview--hover">
+              <div style="padding: 0rem 1rem 1rem;">
+                <tabset>
+                  <tab heading="未读消息" (select)="unReadRemind()">
+                    <div [ngBusy]="unreadRemindsBusy"></div>
+                    <a *ngFor="let remind of unreadReminds" (click)="showRemindDetail(remind)" class="listview__item">
+                      <div class="listview__content">
+                        <div class="listview__heading">
+                          {{remind.title}}
+                        </div>
+                        <p>{{remind.content}}</p>
+                      </div>
+                    </a>
+                  </tab>
+                  <tab heading="已读消息" (select)="readRemind()">
+                    <div [ngBusy]="readRemindsBusy"></div>
+                    <a *ngFor="let remind of readReminds" (click)="showRemindDetail(remind)" class="listview__item">
+                      <div class="listview__content">
+                        <div class="listview__heading">
+                          {{remind.title}}
+                        </div>
+                        <p>{{remind.content}}</p>
+                      </div>
+                    </a>
+                  </tab>
+                </tabset>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!-- 个人私信 -->
+        <li dropdown>
+          <a dropdownToggle>
+            <i class="zmdi zmdi-notifications"></i>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+            <div class="listview listview--hover">
+              <div class="listview__header"></div>
+            </div>
+          </div>
+        </li>
+        <!-- 个人工具 -->
+        <li dropdown triggers="mouseover" class="d-none d-sm-inline-block">
+          <a dropdownToggle class="top-nav__notify">
+
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+            <div class="row app-shortcuts">
+              <a class="col-4 app-shortcuts__item" [routerLink]="['/article/create']">
+                <i class="zmdi zmdi-file-text bg-blue"></i>
+                <small class="">写文章</small>
+              </a>
+              <a class="col-4 app-shortcuts__item" [routerLink]="['/space']">
+                <i class="zmdi zmdi-assignment bg-teal"></i>
+                <small class="">专栏/空间</small>
+              </a>
+            </div>
+          </div>
+        </li>
+        <!-- 个人信息 -->
+        <li dropdown class="d-none d-sm-inline-block">
+          <a dropdownToggle=""></a>
+          <div *ngIf="userInfo" class="user" dropdown>
+            <div class="user__info" dropdownToggle>
+              <img class="user__img" src="{{userInfo.avatar}}" alt="{{ userInfo.username }}">
+            </div>
+            <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-menu--block" role="menu">
+              <div class="listview listview--hover mr-center">
+                <div class="listview__header">欢迎:
+                  <span class="red">{{ userInfo.username }}</span>
+                </div>
+                <a [routerLink]="['/account', userInfo.username, 'info']" class="listview__item">
+                  <div class="listview__content">
+                    <div class="listview__heading">
+                    <span>
+                      <i class="zmdi zmdi-account zmdi-hc-fw"></i>
+                      <span>个人资料</span>
+                    </span>
+                    </div>
+                  </div>
+                </a>
+                <a (click)="showChangerPassword()" class="listview__item">
+                  <div class="listview__content">
+                    <div class="listview__heading">
+                    <span>
+                      <i class="zmdi zmdi-lock zmdi-hc-fw"></i>
+                      <span>修改密码</span>
+                    </span>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" (click)="logout()" class="listview__item">
+                  <div class="listview__content">
+                    <div class="listview__heading">
+                    <span>
+                      <i class="zmdi zmdi-power zmdi-hc-fw"></i>
+                      <span>退出</span>
+                    </span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ng-container>
+      <ng-template #noAuth>
+        <!-- 登录 -->
+        <li class="d-none d-sm-inline-block">
+          <a [routerLink]="['/user/login']" class="btn btn-info waves-effect">登录</a>
+        </li>
+      </ng-template>
+    </ul>
+  </header>
+  <!--<router-outlet></router-outlet>-->
+</main>

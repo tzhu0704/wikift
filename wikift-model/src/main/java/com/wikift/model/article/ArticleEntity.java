@@ -17,11 +17,9 @@
  */
 package com.wikift.model.article;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.wikift.model.comment.CommentEntity;
 import com.wikift.model.space.SpaceEntity;
 import com.wikift.model.user.UserEntity;
 import lombok.AllArgsConstructor;
@@ -63,6 +61,8 @@ public class ArticleEntity {
     @NotNull
     @Size(min = 10)
     private String content;
+
+    private Integer parent; // 父级节点
 
     @Column(name = "a_create_time")
     @CreatedDate

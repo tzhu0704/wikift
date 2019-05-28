@@ -21,6 +21,7 @@ import com.wikift.common.enums.OrderEnums;
 import com.wikift.model.article.ArticleEntity;
 import com.wikift.model.article.ArticleHistoryEntity;
 import com.wikift.model.counter.CounterEntity;
+import com.wikift.model.space.SpaceEntity;
 import com.wikift.support.repository.article.ArticleHistoryRepository;
 import com.wikift.support.repository.article.ArticleRepository;
 import com.wikift.support.repository.article.ArticleRepositorySenior;
@@ -78,7 +79,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<ArticleEntity> getAllArticleBySpace(Long spaceId, Pageable pageable) {
-        return articleRepository.findAllBySpace(spaceId, pageable);
+        SpaceEntity space = new SpaceEntity();
+        space.setId(spaceId);
+        return articleRepository.findAllBySpace(space, pageable);
     }
 
     @Override

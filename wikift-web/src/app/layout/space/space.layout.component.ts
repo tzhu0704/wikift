@@ -15,10 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {RouterModule, Routes} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {SharedService} from "../../shared/services/shared.service";
 
-const ROUTES: Routes = [
-  {path: '', loadChildren: './layout/layout.module#LayoutModule'}
-];
+@Component({
+  selector: 'space-layout',
+  templateUrl: './space.layout.component.html'
+})
+export class SpaceLayoutComponent implements OnInit {
 
-export const routing = RouterModule.forRoot(ROUTES);
+  maTheme: string = this.sharedService.maTheme;
+
+  constructor(private sharedService: SharedService,
+              private activatedRoute: ActivatedRoute) {
+    sharedService.maThemeSubject.subscribe((value) => {
+      this.maTheme = value;
+    });
+  }
+
+  ngOnInit() {
+    console.log(this.activatedRoute.params);
+  }
+
+}

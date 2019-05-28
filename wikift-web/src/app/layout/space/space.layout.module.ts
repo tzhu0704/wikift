@@ -19,7 +19,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {NgModule} from '@angular/core';
-import {LayoutRouting} from './layout.routing';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
 import {ButtonsModule} from 'ngx-bootstrap';
@@ -30,13 +29,8 @@ import {BusyConfig, BusyModule} from 'angular2-busy';
 import {ToastyModule, ToastyService} from 'ng2-toasty';
 import {CustomFormsModule} from 'ng2-validation';
 
-import {LayoutComponent} from './layout.component';
-import {HeaderComponent} from './header/header.component';
-import {NavigationTriggerComponent} from './header/navigation-trigger/navigation-trigger.component';
-
-import {UserService} from '../../services/user.service';
-import {RemindService} from '../../services/remind.service';
-import {SpaceLayoutModule} from "./space/space.layout.module";
+import {LayoutRouting} from "../layout.routing";
+import {SpaceLayoutComponent} from "./space.layout.component";
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -52,9 +46,7 @@ export function busyConfigFactory() {
 
 @NgModule({
   declarations: [
-    LayoutComponent,
-    HeaderComponent,
-    NavigationTriggerComponent
+    SpaceLayoutComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +54,6 @@ export function busyConfigFactory() {
     FormsModule,
     BusyModule,
     CustomFormsModule,
-    SpaceLayoutModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     ButtonsModule.forRoot(),
@@ -72,8 +63,6 @@ export function busyConfigFactory() {
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
   ],
   providers: [
-    UserService,
-    RemindService,
     {
       provide: BusyConfig,
       useFactory: busyConfigFactory
@@ -82,5 +71,5 @@ export function busyConfigFactory() {
   ]
 })
 
-export class LayoutModule {
+export class SpaceLayoutModule {
 }
