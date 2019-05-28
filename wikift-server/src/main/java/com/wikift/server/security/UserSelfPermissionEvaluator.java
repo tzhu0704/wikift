@@ -17,7 +17,7 @@
  */
 package com.wikift.server.security;
 
-import com.wikift.common.enums.RepositoryEnums;
+import com.wikift.model.enums.RepositoryEnums;
 import com.wikift.model.article.ArticleEntity;
 import com.wikift.model.comment.CommentEntity;
 import com.wikift.model.user.UserEntity;

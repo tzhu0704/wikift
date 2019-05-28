@@ -17,7 +17,7 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import com.wikift.model.result.CommonResult;
 import com.wikift.model.user.GroupEntity;
 import com.wikift.support.service.user.GroupService;

@@ -15,19 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.utils;
+package com.wikift.model.enums;
 
-import com.wikift.model.enums.MessageEnums;
+public enum RoleEnums {
 
-/**
- * 提示消息工具类
- *
- * @author qianmoQ
- */
-public class MessageUtils {
-
-    public static String getParamNotNull(String alertName) {
-        return String.format("param %s" + MessageEnums.PARAMS_NOT_NULL.getValue(), alertName);
-    }
+    GUEST,
+    USER,
+    GROUP,
+    WRITE,
+    READER,
+    ADMIN,
+    USER_ADMIN,
+    GROUP_ADMIN,
+    SPACE_ADMIN
 
 }

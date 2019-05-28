@@ -31,6 +31,7 @@ import { ArticleService } from '../../../services/article.service';
 import { UserService } from '../../../services/user.service';
 import { SpaceService } from '../../../services/space.service';
 import { WikiftGroupModule } from '../../shared/directives/wikift-group/wikift-group.module';
+import {SafeImgHtml} from "../../shared/pipe/SafeImgHtml";
 
 export function busyConfigFactory() {
     return new BusyConfig({
@@ -56,7 +57,8 @@ const HOME_ROUTES: Routes = [
     ],
     exports: [],
     declarations: [
-        SpaceComponent
+        SpaceComponent,
+        SafeImgHtml
     ],
     providers: [
         ArticleService,

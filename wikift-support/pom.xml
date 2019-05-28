@@ -34,7 +34,7 @@
     <dependencies>
         <dependency>
             <groupId>com.wikift</groupId>
-            <artifactId>wikift-model</artifactId>
+            <artifactId>wikift-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>

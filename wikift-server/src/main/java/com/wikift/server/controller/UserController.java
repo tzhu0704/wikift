@@ -17,7 +17,7 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.common.enums.MessageEnums;
+import com.wikift.model.enums.MessageEnums;
 import com.wikift.common.utils.BeanUtils;
 import com.wikift.common.utils.ShaUtils;
 import com.wikift.model.result.CommonResult;
@@ -56,6 +56,7 @@ public class UserController {
         entity.setId(0l);
         entity.setUsername(param.getUsername());
         entity.setPassword(ShaUtils.hash256(param.getPassword()));
+        entity.setAliasName(param.getUsername());
         UserTypeEntity userType = new UserTypeEntity();
         userType.setId(1L);
         entity.setUserType(userType);

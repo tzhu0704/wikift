@@ -29,10 +29,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wikift</groupId>
-            <artifactId>wikift-common</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>

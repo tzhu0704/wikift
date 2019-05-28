@@ -17,32 +17,32 @@
 -->
 <!-- wikift group each -->
 <div class="contacts row">
-    <div *ngFor="let each of eachData" class="col-xl-2 col-lg-3 col-sm-4 col-6">
-        <div class="contacts__item">
-            <div [ngSwitch]="config.type">
-                <div *ngSwitchCase="type.SPACE">
-                    <a [routerLink]="['/space/', each.code, 'display']" class="contacts__img">
-                        <img src="{{each.avatar}} " alt="{{each.name}}">
-                    </a>
-                    <div class="contacts__info">
-                        <strong>{{each.name}}</strong>
-                        <small>{{each.description? each.description: '该空间还没有任何描述'}}</small>
-                    </div>
-                    <button [routerLink]="['/space/', each.code, 'display']" class="contacts__btn">进入空间</button>
-                </div>
-                <div *ngSwitchCase="type.USER">
-                    <a [routerLink]="['/account/', each.username, 'info']" class="contacts__img">
-                        <img src="{{each.avatar}} " alt="{{each.username}}">
-                    </a>
-                    <div class="contacts__info">
-                        <strong>{{each.username}}</strong>
-                        <small>{{each.signature? each.signature: '用户太懒了什么都没写'}}</small>
-                    </div>
-                    <button (click)="unfollow(each)" class="contacts__btn">取消关注</button>
-                </div>
-            </div>
+  <div *ngFor="let each of eachData" class="col-xl-2 col-lg-3 col-sm-4 col-6">
+    <div class="contacts__item">
+      <div [ngSwitch]="config.type">
+        <div *ngSwitchCase="type.SPACE">
+          <a [routerLink]="['/space/', each.code, 'display']" class="contacts__img">
+            <img [src]="each.avatar" alt="{{each.name}}">
+          </a>
+          <div class="contacts__info">
+            <strong>{{each.name}}</strong>
+            <small>{{each.description ? each.description : '该空间还没有任何描述'}}</small>
+          </div>
+          <button [routerLink]="['/space/', each.code, 'display']" class="contacts__btn">进入空间</button>
         </div>
+        <div *ngSwitchCase="type.USER">
+          <a [routerLink]="['/account/', each.username, 'info']" class="contacts__img">
+            <img src="{{each.avatar}} " alt="{{each.username}}">
+          </a>
+          <div class="contacts__info">
+            <strong>{{each.username}}</strong>
+            <small>{{each.signature ? each.signature : '用户太懒了什么都没写'}}</small>
+          </div>
+          <button (click)="unfollow(each)" class="contacts__btn">取消关注</button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- close pagination config -->
 <!-- <div *ngIf="config.pagination" class="mr-center">

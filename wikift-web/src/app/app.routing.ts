@@ -15,10 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Routes, RouterModule } from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 const ROUTES: Routes = [
-    { path: '', loadChildren: './layout/layout.module#LayoutModule' }
+  {path: '', loadChildren: './layout/layout.module#LayoutModule'}
 ];
 
 export const routing = RouterModule.forRoot(ROUTES);

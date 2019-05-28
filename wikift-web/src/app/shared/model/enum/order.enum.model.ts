@@ -15,14 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 /**
  * 排序使用
  * @author qianmoQ
  */
 export enum OrderEnumModel {
 
-    FABULOU = 'FABULOU',
-    VIEW = 'VIEW',
-    NATIVE_CREATE_TIME = 'NATIVE_CREATE_TIME'
+  FABULOU,
+  VIEW,
+  NATIVE_CREATE_TIME
 
 }

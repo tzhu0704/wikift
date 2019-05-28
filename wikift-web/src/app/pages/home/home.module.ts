@@ -15,59 +15,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { BusyModule, BusyConfig } from 'angular2-busy';
-import { AngularEchartsModule } from 'ngx-echarts';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {BusyConfig, BusyModule} from 'angular2-busy';
+import {AngularEchartsModule} from 'ngx-echarts';
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from './home.component';
 
-import { ArticleService } from '../../../services/article.service';
-import { WikiftEditorModule } from '../../shared/directives/wikift-editor/wikift-editor.module';
-import { UserService } from '../../../services/user.service';
-import { ArticleTagService } from '../../../services/article.tag.service';
+import {ArticleService} from '../../../services/article.service';
+import {WikiftEditorModule} from '../../shared/directives/wikift-editor/wikift-editor.module';
+import {UserService} from '../../../services/user.service';
+import {ArticleTagService} from '../../../services/article.tag.service';
 
 export function busyConfigFactory() {
-    return new BusyConfig({
-        message: '数据加载中, 请稍候...',
-        backdrop: true,
-    });
+  return new BusyConfig({
+    message: '数据加载中, 请稍候...',
+    backdrop: true,
+  });
 }
 
 const HOME_ROUTES: Routes = [
-    { path: '', component: HomeComponent }
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
-    imports: [
-        WikiftEditorModule,
-        CommonModule,
-        FormsModule,
-        BusyModule,
-        AngularEchartsModule,
-        TooltipModule.forRoot(),
-        TabsModule.forRoot(),
-        PaginationModule.forRoot(),
-        RouterModule.forChild(HOME_ROUTES)
-    ],
-    exports: [],
-    declarations: [
-        HomeComponent
-    ],
-    providers: [
-        ArticleService,
-        UserService,
-        ArticleTagService,
-        {
-            provide: BusyConfig,
-            useFactory: busyConfigFactory
-        }
-    ],
+  imports: [
+    WikiftEditorModule,
+    CommonModule,
+    FormsModule,
+    BusyModule,
+    AngularEchartsModule,
+    TooltipModule.forRoot(),
+    TabsModule.forRoot(),
+    PaginationModule.forRoot(),
+    RouterModule.forChild(HOME_ROUTES)
+  ],
+  exports: [],
+  declarations: [
+    HomeComponent
+  ],
+  providers: [
+    ArticleService,
+    UserService,
+    ArticleTagService,
+    {
+      provide: BusyConfig,
+      useFactory: busyConfigFactory
+    }
+  ],
 })
-export class HomeModule { }
+export class HomeModule {
+}

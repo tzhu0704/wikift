@@ -17,13 +17,14 @@
  */
 export class ArticleFabulousParamModel {
 
-    public userId;
-    public articleId;
+  public userId;
+  public articleId;
 
-    constructor() { }
+  constructor() {
+  }
 
-    public toJosn(): string {
-        return JSON.stringify(this);
-    }
+  public toJosn(): string {
+    return JSON.stringify(this);
+  }
 
 }

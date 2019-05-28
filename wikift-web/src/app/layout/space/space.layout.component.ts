@@ -15,19 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.utils;
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {SharedService} from "../../shared/services/shared.service";
 
-import com.wikift.model.enums.MessageEnums;
+@Component({
+  selector: 'space-layout',
+  templateUrl: './space.layout.component.html'
+})
+export class SpaceLayoutComponent implements OnInit {
 
-/**
- * 提示消息工具类
- *
- * @author qianmoQ
- */
-public class MessageUtils {
+  maTheme: string = this.sharedService.maTheme;
 
-    public static String getParamNotNull(String alertName) {
-        return String.format("param %s" + MessageEnums.PARAMS_NOT_NULL.getValue(), alertName);
-    }
+  constructor(private sharedService: SharedService,
+              private activatedRoute: ActivatedRoute) {
+    sharedService.maThemeSubject.subscribe((value) => {
+      this.maTheme = value;
+    });
+  }
+
+  ngOnInit() {
+    console.log(this.activatedRoute.params);
+  }
 
 }

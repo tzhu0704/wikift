@@ -15,19 +15,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.wikift.common.utils;
+package com.wikift.common.tree;
 
-import com.wikift.model.enums.MessageEnums;
+import lombok.Data;
+import lombok.ToString;
 
 /**
- * 提示消息工具类
- *
- * @author qianmoQ
+ * <p> TreeModelItemSupport </p>
+ * <p> Description : TreeModelItemSupport </p>
+ * <p> Author : qianmoQ </p>
+ * <p> Version : 1.0 </p>
+ * <p> Create Time : 2019-05-28 18:12 </p>
+ * <p> Author Email: <a href="mailTo:shichengoooo@163.com">qianmoQ</a> </p>
  */
-public class MessageUtils {
+@Data
+@ToString
+public class TreeModelItemSupport {
 
-    public static String getParamNotNull(String alertName) {
-        return String.format("param %s" + MessageEnums.PARAMS_NOT_NULL.getValue(), alertName);
+    private Long phrase;
+
+    private TreeModelItemSupport() {
+    }
+
+    public static TreeModelItemSupport buildNew() {
+        return new TreeModelItemSupport();
     }
 
 }

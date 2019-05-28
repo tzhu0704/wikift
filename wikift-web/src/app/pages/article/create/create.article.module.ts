@@ -15,67 +15,68 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ArchwizardModule } from 'ng2-archwizard';
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { BusyModule, BusyConfig } from 'angular2-busy';
-import { SelectModule } from 'angular2-select';
-import { ToastyModule } from 'ng2-toasty';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {ArchwizardModule} from 'ng2-archwizard';
+import {AlertModule} from 'ngx-bootstrap/alert';
+import {BusyConfig, BusyModule} from 'angular2-busy';
+import {SelectModule} from 'angular2-select';
+import {ToastyModule} from 'ng2-toasty';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
-import { CreateArticleComponent } from './create.article.component';
+import {CreateArticleComponent} from './create.article.component';
 
-import { ArticleService } from '../../../../services/article.service';
-import { WikiftEditorModule } from '../../../shared/directives/wikift-editor/wikift-editor.module';
-import { ArticleTypeService } from '../../../../services/article.type.service';
-import { ArticleTagService } from '../../../../services/article.tag.service';
-import { SpaceService } from '../../../../services/space.service';
+import {ArticleService} from '../../../../services/article.service';
+import {WikiftEditorModule} from '../../../shared/directives/wikift-editor/wikift-editor.module';
+import {ArticleTypeService} from '../../../../services/article.type.service';
+import {ArticleTagService} from '../../../../services/article.tag.service';
+import {SpaceService} from '../../../../services/space.service';
 
 const CREATE_ARTICLE_ROUTES: Routes = [
-    { path: '', component: CreateArticleComponent }
+  {path: '', component: CreateArticleComponent}
 ];
 
 export function busyConfigFactory() {
-    return new BusyConfig({
-        message: '数据加载中, 请稍候...',
-        minDuration: 1000,
-        backdrop: true,
-    });
+  return new BusyConfig({
+    message: '数据加载中, 请稍候...',
+    minDuration: 1000,
+    backdrop: true,
+  });
 }
 
 @NgModule({
-    imports: [
-        WikiftEditorModule,
-        CommonModule,
-        ArchwizardModule,
-        FormsModule,
-        BusyModule,
-        SelectModule,
-        ToastyModule.forRoot(),
-        ModalModule.forRoot(),
-        AlertModule.forRoot(),
-        TooltipModule.forRoot(),
-        PaginationModule.forRoot(),
-        RouterModule.forChild(CREATE_ARTICLE_ROUTES)
-    ],
-    exports: [],
-    declarations: [
-        CreateArticleComponent
-    ],
-    providers: [
-        ArticleService,
-        ArticleTypeService,
-        ArticleTagService,
-        SpaceService,
-        {
-            provide: BusyConfig,
-            useFactory: busyConfigFactory
-        }
-    ],
+  imports: [
+    WikiftEditorModule,
+    CommonModule,
+    ArchwizardModule,
+    FormsModule,
+    BusyModule,
+    SelectModule,
+    ToastyModule.forRoot(),
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
+    TooltipModule.forRoot(),
+    PaginationModule.forRoot(),
+    RouterModule.forChild(CREATE_ARTICLE_ROUTES)
+  ],
+  exports: [],
+  declarations: [
+    CreateArticleComponent
+  ],
+  providers: [
+    ArticleService,
+    ArticleTypeService,
+    ArticleTagService,
+    SpaceService,
+    {
+      provide: BusyConfig,
+      useFactory: busyConfigFactory
+    }
+  ],
 })
-export class CreateArticleModule { }
+export class CreateArticleModule {
+}

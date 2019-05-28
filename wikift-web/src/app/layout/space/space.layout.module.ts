@@ -16,63 +16,60 @@
  * limitations under the License.
  */
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {RouterModule, Routes} from '@angular/router';
-import {PaginationModule} from 'ngx-bootstrap/pagination';
-import {TooltipModule} from 'ngx-bootstrap/tooltip';
+
+import {NgModule} from '@angular/core';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
+import {ButtonsModule} from 'ngx-bootstrap';
+import {PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {TabsModule} from 'ngx-bootstrap/tabs';
-import {PopoverModule} from 'ngx-bootstrap/popover';
-import {TreeNgxModule} from 'tree-ngx';
-import { MarkdownModule } from 'angular2-markdown';
-
+import {ModalModule} from 'ngx-bootstrap/modal';
 import {BusyConfig, BusyModule} from 'angular2-busy';
-import {WikiftEditorModule} from '../../../shared/directives/wikift-editor/wikift-editor.module';
+import {ToastyModule, ToastyService} from 'ng2-toasty';
+import {CustomFormsModule} from 'ng2-validation';
 
-import {SpaceInfoComponent} from './space.info.component';
+import {LayoutRouting} from "../layout.routing";
+import {SpaceLayoutComponent} from "./space.layout.component";
 
-import {ArticleService} from '../../../../services/article.service';
-import {SpaceService} from '../../../../services/space.service';
-import {CommentService} from "../../../../services/comment.service";
+const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 export function busyConfigFactory() {
   return new BusyConfig({
     message: '数据加载中, 请稍候...',
+    minDuration: 1000,
     backdrop: true,
   });
 }
 
-const SPACE_INFO_ROUTES: Routes = [
-  {path: '', component: SpaceInfoComponent}
-];
-
 @NgModule({
+  declarations: [
+    SpaceLayoutComponent,
+  ],
   imports: [
     CommonModule,
+    LayoutRouting,
     FormsModule,
     BusyModule,
-    WikiftEditorModule,
-    TreeNgxModule,
-    TooltipModule.forRoot(),
+    CustomFormsModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    ButtonsModule.forRoot(),
     TabsModule.forRoot(),
-    PaginationModule.forRoot(),
-    PopoverModule.forRoot(),
-    MarkdownModule.forRoot(),
-    RouterModule.forChild(SPACE_INFO_ROUTES)
-  ],
-  exports: [],
-  declarations: [
-    SpaceInfoComponent
+    ModalModule.forRoot(),
+    ToastyModule.forRoot(),
+    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
   ],
   providers: [
-    ArticleService,
-    SpaceService,
-    CommentService,
     {
       provide: BusyConfig,
       useFactory: busyConfigFactory
-    }
-  ],
+    },
+    ToastyService
+  ]
 })
-export class SpaceInfoModule {
+
+export class SpaceLayoutModule {
 }

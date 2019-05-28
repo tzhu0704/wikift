@@ -25,6 +25,7 @@ export class ArticleModel {
     public id: Number;
     public title: String = '';
     public content: String = '';
+    public parent: number = -1;
     public user: UserModel;
     public articleType: ArticleTypeModel;
     public articleTags: Array<ArticleTagModel>;

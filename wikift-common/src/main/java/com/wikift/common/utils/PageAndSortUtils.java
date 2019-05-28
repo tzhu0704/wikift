@@ -17,7 +17,7 @@
  */
 package com.wikift.common.utils;
 
-import com.wikift.common.enums.OrderEnums;
+import com.wikift.model.enums.OrderEnums;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
