@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute} from '@angular/router';
 import {TreeMode} from 'tree-ngx';
@@ -39,8 +39,6 @@ export class SpaceInfoComponent implements OnInit {
   page: CommonPageModel;
   // 当前页数
   currentPage: number;
-  // 空间列表
-  public articles;
   public articleCount;
   // 当前空间编码
   private spaceCode;
@@ -67,7 +65,8 @@ export class SpaceInfoComponent implements OnInit {
               private userService: UserService,
               private spaceService: SpaceService,
               private articleService: ArticleService,
-              private commentService: CommentService) {
+              private commentService: CommentService,
+              public changeDetectorRef:ChangeDetectorRef) {
     this.page = new CommonPageModel();
     this.loginUserInfo = CookieUtils.getUser();
   }
@@ -115,6 +114,8 @@ export class SpaceInfoComponent implements OnInit {
       result => {
         this.article = result.data;
         this.initComments();
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
       }
     );
   }

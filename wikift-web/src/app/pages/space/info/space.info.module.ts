@@ -24,6 +24,7 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import {PopoverModule} from 'ngx-bootstrap/popover';
 import {TreeNgxModule} from 'tree-ngx';
+import { MarkdownModule } from 'angular2-markdown';
 
 import {BusyConfig, BusyModule} from 'angular2-busy';
 import {WikiftEditorModule} from '../../../shared/directives/wikift-editor/wikift-editor.module';
@@ -56,6 +57,7 @@ const SPACE_INFO_ROUTES: Routes = [
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
+    MarkdownModule.forRoot(),
     RouterModule.forChild(SPACE_INFO_ROUTES)
   ],
   exports: [],

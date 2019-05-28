@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {IOption} from 'ng-select';
 import {ToastyService} from 'ng2-toasty';
@@ -34,6 +34,7 @@ import {CodeConfig} from '../../../../config/code.config';
 import {SpaceService} from '../../../../services/space.service';
 import {CommonPageModel} from '../../../shared/model/result/page.model';
 import {ResultUtils} from '../../../shared/utils/result.util';
+import {SpaceModel} from "../../../shared/model/space/space.model";
 
 @Component({
   selector: 'wikift-article-create',
@@ -50,8 +51,6 @@ export class CreateArticleComponent implements OnInit {
   public articleTagsBusy: Subscription;
   public articleTagFields;
   public articleTagValues = new Array();
-  // 空间列表
-  public spaces;
   // 分页数据
   public page: CommonPageModel;
   // 当前页数
@@ -59,16 +58,25 @@ export class CreateArticleComponent implements OnInit {
   // 文章属性框
   @ViewChild('settingAritcleModel')
   public settingAritcleModel: ModalDirective;
+  // 当前创建文章的归属空间
+  public space;
+  // 当前创建文章的父节点
+  public parent;
 
   constructor(private router: Router,
               private articleService: ArticleService,
               private articleTypeService: ArticleTypeService,
               private articleTagService: ArticleTagService,
               private toastyService: ToastyService,
-              private spaceService: SpaceService) {
+              private spaceService: SpaceService,
+              private route: ActivatedRoute) {
     this.page = new CommonPageModel();
     this.page.size = 3;
     this.page.number = 0;
+    this.route.params.subscribe((params) => {
+      this.parent = params.parent;
+      this.space = params.space;
+    });
   }
 
   ngOnInit() {
@@ -103,16 +111,6 @@ export class CreateArticleComponent implements OnInit {
     );
   }
 
-  initSpace(page: CommonPageModel) {
-    this.articleTagsBusy = this.spaceService.getAllSpacesByPublicOrUser(CookieUtils.getUser().id, page).subscribe(
-      result => {
-        this.spaces = result.data.content;
-        this.page = CommonPageModel.getPage(result.data);
-        this.currentPage = this.page.number;
-      }
-    );
-  }
-
   // 获取编辑器内容
   getData(value) {
     this.article.content = value;
@@ -133,6 +131,10 @@ export class CreateArticleComponent implements OnInit {
       articleTag.id = e;
       this.article.articleTags.push(articleTag);
     });
+    let spaceInfo = new SpaceModel();
+    spaceInfo.id = this.space;
+    this.article.space = spaceInfo;
+    this.article.parent = this.parent;
     this.articleService.save(this.article).subscribe(
       result => {
         if (result.code === CodeConfig.SUCCESS) {
@@ -149,20 +151,6 @@ export class CreateArticleComponent implements OnInit {
 
   showArticleTagsStep(event) {
     this.initArticleTag();
-  }
-
-  showSpaceStep(event) {
-    this.initSpace(this.page);
-  }
-
-  pageChanged(event: any) {
-    this.page.number = event.page - 1;
-    this.spaceService.getAllSpacesByPublicOrUser(CookieUtils.getUser().id, this.page).subscribe(
-      result => {
-        this.spaces = result.data.content;
-        this.page = CommonPageModel.getPage(result.data);
-      }
-    );
   }
 
   onSelected(event: any) {

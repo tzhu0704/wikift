@@ -15,125 +15,145 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, OnInit, Output, Input, EventEmitter, Directive } from '@angular/core';
-import { AfterViewInit, OnChanges, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 
 declare var jQuery: any;
+declare var $: any;
 declare var editormd: any;
 
 @Component({
-    selector: 'wikift-editor',
-    templateUrl: './wikift-editor.component.html'
+  selector: 'wikift-editor',
+  templateUrl: './wikift-editor.component.html'
 })
 export class WikiftEditorComponent implements OnInit {
 
-    public editor: any;
+  @ViewChild("editor")
+  public editor: any;
 
-    // 编辑器ID
-    @Input('id')
-    id: string;
+  // 编辑器ID
+  @Input('id')
+  id: string;
 
-    // 编辑器TOCid
-    @Input('tocId')
-    tocId = 'wikift-toc-container';
+  // 编辑器TOCid
+  @Input('tocId')
+  tocId = 'wikift-toc-container';
 
-    // 传递的markdown数据
-    @Input('markdown')
-    markdown: string;
+  // 传递的markdown数据
+  @Input('markdown')
+  markdown: string;
 
-    // 是否预览模式
-    @Input('preview')
-    preview: Boolean = false;
+  // 是否预览模式
+  @Input('preview')
+  preview: Boolean = false;
 
-    // 编辑器模式, full, simple, mini
-    @Input('mode')
-    mode = 'full';
+  // 编辑器模式, full, simple, mini
+  @Input('mode')
+  mode = 'full';
 
-    // 编辑器高度
-    @Input('height')
-    height = 490;
+  // 编辑器高度
+  @Input('height')
+  height = 490;
 
-    // 自动获取焦点
-    @Input('focus')
-    focus = false;
+  // 自动获取焦点
+  @Input('focus')
+  focus = false;
 
-    // 预览模式
-    @Input('watch')
-    watch = true;
+  // 预览模式
+  @Input('watch')
+  watch = true;
 
-    constructor() { }
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private zone: NgZone) {
+  }
 
-    // 初始化组件
-    ngAfterViewInit() {
-        const config = {
-            id: this.id,
-            markdown: this.markdown,
-            tocContainer: this.tocId,
-            tex: true,
-            flowChart: true,
-            emoji: true,
-            taskList: true,
-            sequenceDiagram: true,
-            toolbarIcons: this.getToolbarIcons(this.mode),
-            width: '100%',
-            height: this.height,
-            syncScrolling: 'single',
-            autoFocus: this.focus,
-            watch: this.watch,
-            path: '../../../../assets/js/wikift-editor/lib/',
-            imageUploadURL: 'api/upload/mdupload?test=dfdf'
-        };
-
-        if (this.preview) {
-            editormd.markdownToHTML(this.id, config);
-        } else {
-            this.editor = editormd(config);
-        }
+  // 初始化组件
+  ngAfterViewInit() {
+    this.ngOnDestory()
+    const config = {
+      id: this.id,
+      markdown: this.markdown,
+      tocContainer: this.tocId,
+      tex: true,
+      flowChart: true,
+      emoji: true,
+      taskList: true,
+      sequenceDiagram: true,
+      toolbarIcons: this.getToolbarIcons(this.mode),
+      width: '100%',
+      height: this.height,
+      syncScrolling: 'single',
+      autoFocus: this.focus,
+      watch: this.watch,
+      path: '../../../../assets/js/wikift-editor/lib/',
+      imageUploadURL: 'api/upload/mdupload?test=dfdf'
+    };
+    if (this.preview) {
+      this.editor = editormd.markdownToHTML(this.id, config);
+    } else {
+      this.editor = editormd(config);
     }
+  }
 
-    /**
-     * 初始化组件信息
-     */
-    ngOnChanges() {
-    }
+  ngAfterContentInit() {
+  }
 
-    ngOnInit() {
-        jQuery('.editormd-preview-close-btn').hide();
-    }
+  ngOnDestory() {
+    this.markdown = '';
+  }
 
-    /**
-     * 将子组件获取的内容传输到父组件
-     */
+  /**
+   * 初始化组件信息
+   */
+  ngOnChanges() {
+    this.changeDetectorRef.detectChanges();
+    // 解决组件不重新加载数据问题
+    this.zone.run(() => {
+      if (this.editor) {
+        // 清空原有数据
+        this.editor.empty();
+      }
+      this.editor = editormd.markdownToHTML(this.id, {markdown: this.markdown});
+    })
+  }
+
+  ngOnInit() {
+    jQuery('.editormd-preview-close-btn').hide();
+  }
+
+  /**
+   * 将子组件获取的内容传输到父组件
+   */
     // tslint:disable-next-line:member-ordering
-    @Output()
-    getEditorValue = new EventEmitter<any>();
-    getValue() {
-        this.getEditorValue.emit(this.editor.getMarkdown());
-    }
+  @Output()
+  getEditorValue = new EventEmitter<any>();
 
-    getToolbarIcons(mode) {
-        switch (mode) {
-            default:
-            case 'full':
-                return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
-                    'ucwords', 'uppercase', 'lowercase', '|', 'h1', 'h2',
-                    'h3', 'h4', 'h5', 'h6', '|', 'list-ul', 'list-ol', 'hr',
-                    '|', 'link', 'reference-link', 'image', 'code', 'preformatted-text',
-                    'code-block', 'table', 'datetime', 'emoji', 'html-entities',
-                    'pagebreak', '|', 'goto-line', 'watch', 'preview', 'fullscreen',
-                    'clear', 'search', '|', 'help'];
-            case 'simple':
-                return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
-                    'uppercase', 'lowercase', '|', 'h1', 'h2', 'h3', 'h4', 'h5',
-                    'h6', '|', 'list-ul', 'list-ol', 'hr', '|', 'watch', 'preview',
-                    'fullscreen', '|', 'help'];
-            case 'mini':
-                return ['undo', 'redo', 'watch', 'preview', 'help'];
-            case 'comment':
-                return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
-                    'uppercase', 'lowercase', '|', 'h1', 'h2', 'h3', 'h4', 'h5',
-                    'h6', '|', 'list-ul', 'list-ol', 'hr', '|', 'watch', 'preview'];
-        }
+  getValue() {
+    this.getEditorValue.emit(this.editor.getMarkdown());
+  }
+
+  getToolbarIcons(mode) {
+    switch (mode) {
+      default:
+      case 'full':
+        return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
+          'ucwords', 'uppercase', 'lowercase', '|', 'h1', 'h2',
+          'h3', 'h4', 'h5', 'h6', '|', 'list-ul', 'list-ol', 'hr',
+          '|', 'link', 'reference-link', 'image', 'code', 'preformatted-text',
+          'code-block', 'table', 'datetime', 'emoji', 'html-entities',
+          'pagebreak', '|', 'goto-line', 'watch', 'preview', 'fullscreen',
+          'clear', 'search', '|', 'help'];
+      case 'simple':
+        return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
+          'uppercase', 'lowercase', '|', 'h1', 'h2', 'h3', 'h4', 'h5',
+          'h6', '|', 'list-ul', 'list-ol', 'hr', '|', 'watch', 'preview',
+          'fullscreen', '|', 'help'];
+      case 'mini':
+        return ['undo', 'redo', 'watch', 'preview', 'help'];
+      case 'comment':
+        return ['undo', 'redo', '|', 'bold', 'del', 'italic', 'quote',
+          'uppercase', 'lowercase', '|', 'h1', 'h2', 'h3', 'h4', 'h5',
+          'h6', '|', 'list-ul', 'list-ol', 'hr', '|', 'watch', 'preview'];
     }
+  }
 
 }

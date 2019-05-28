@@ -60,7 +60,8 @@
           <tab heading="文章目录"></tab>
         </tabset>
         <div style="margin-top: -35px; float: right;">
-          <a [routerLink]="['/' + space.id + '/article/create/']" *ngIf="loginUserInfo.id === space?.user.id">写文章</a>
+          <a [routerLink]="['/' + space.id + '/article/create/' + article?.id ]"
+             *ngIf="loginUserInfo.id === space?.user.id">写文章</a>
         </div>
         <tree-ngx *ngIf="treeNodes"
                   (selectedItems)="showArticleDetails($event)"
@@ -186,8 +187,9 @@
             <div class="card-body border-b-1">
               <p class="mb-0">
                         <span *ngIf="article; else loadingData">
-                            <wikift-editor id="wikift-editor-{{article.id}}" markdown="{{article.content}}"
-                                           [tocId]="'#wikift-toc-container'" [preview]="'true'"></wikift-editor>
+                            <wikift-editor id="wikift-editor-{{article.id}}"
+                                           [markdown]="article.content"
+                                           [preview]="'true'"></wikift-editor>
                         </span>
                 <ng-template #loadingData>
                   数据加载中...

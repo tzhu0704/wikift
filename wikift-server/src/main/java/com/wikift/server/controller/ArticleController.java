@@ -17,13 +17,13 @@
  */
 package com.wikift.server.controller;
 
-import com.wikift.model.enums.MessageEnums;
-import com.wikift.model.enums.OrderEnums;
 import com.wikift.common.utils.MessageUtils;
 import com.wikift.common.utils.PageAndSortUtils;
 import com.wikift.job.async.RamindAsyncJob;
 import com.wikift.model.article.ArticleEntity;
 import com.wikift.model.article.ArticleTagEntity;
+import com.wikift.model.enums.MessageEnums;
+import com.wikift.model.enums.OrderEnums;
 import com.wikift.model.result.CommonResult;
 import com.wikift.server.param.ArticleFabulousParam;
 import com.wikift.server.param.ArticleViewParam;
@@ -99,6 +99,9 @@ public class ArticleController {
     CommonResult<ArticleEntity> createArticle(@RequestBody @Validated ArticleEntity entity) {
         Assert.notNull(entity, MessageEnums.PARAMS_NOT_NULL.getValue());
         entity.setId(0l);
+        if (ObjectUtils.isEmpty(entity.getId())) {
+            entity.setParent(-1L);
+        }
         ArticleEntity article = articleService.save(entity);
         // 通知发送消息
         ramindAsyncJob.sendRamindToUserFollows(article);

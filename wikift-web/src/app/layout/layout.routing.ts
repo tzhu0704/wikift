@@ -32,7 +32,7 @@ const LAYOUT_ROUTES: Routes = [
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
       {
-        path: ':space/article/create',
+        path: ':space/article/create/:parent',
         loadChildren: '../pages/article/create/create.article.module#CreateArticleModule'
       },
       {path: 'article/:id/editor', loadChildren: '../pages/article/editor.article.module#EditorArticleModule'},

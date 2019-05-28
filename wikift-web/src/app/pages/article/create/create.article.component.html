@@ -91,43 +91,6 @@
                     <div class="mr-auto">
                       <a class="btn btn-secondary" previousStep>上一步</a>
                     </div>
-                    <div class="ml-4">
-                      <a class="btn btn-info" [ngClass]="{'disabled': !articleTagValues.length > 0}" nextStep>下一步</a>
-                    </div>
-                  </div>
-                </wizard-step>
-                <wizard-step stepTitle="文章空间" (stepEnter)="showSpaceStep($event)" navigationSymbol="&#xf085;"
-                             navigationSymbolFontFamily="FontAwesome">
-                  <div class="card-block mr-center" style="margin-top: 10px;">
-                    <div class="contacts row">
-                      <div *ngFor="let space of spaces" class="col-xl-4 col-lg-3 col-sm-4 col-6">
-                        <div class="contacts__item">
-                          <a class="contacts__img-not">
-                            <img src="{{space.avatar}}" alt="{{space.name}}">
-                          </a>
-                          <div class="contacts__info">
-                            <strong>{{space.name}}</strong>
-                          </div>
-                          <label class="custom-control custom-radio">
-                            <input type="radio" [(ngModel)]="article.space" [value]="space" name="article.space"
-                                   class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">选择</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="mr-center ">
-                      <pagination *ngIf="spaces?.length && page" [itemsPerPage]="page.size " [(ngModel)]="currentPage"
-                                  totalItems="{{page.totalElements}} "
-                                  (pageChanged)="pageChanged($event) " [boundaryLinks]="true ">
-                      </pagination>
-                    </div>
-                  </div>
-                  <div class="card-footer d-flex px-4 py-3">
-                    <div class="mr-auto">
-                      <a class="btn btn-secondary" previousStep>上一步</a>
-                    </div>
                   </div>
                 </wizard-step>
               </wizard>
@@ -150,13 +113,9 @@
                   <th class="col-5">标签</th>
                   <td class="col-7 td-ellipsis">鼠标移向我</td>
                 </tr>
-                <tr *ngIf="article.space" class="row mx-0" tooltip="{{article.space.name}}">
-                  <th class="col-5">空间</th>
-                  <td class="col-7 td-ellipsis">{{article.space.name}}</td>
-                </tr>
                 </tbody>
               </table>
-              <div *ngIf="article.space" class="card-footer d-flex px-4 py-3">
+              <div *ngIf="articleTagValues.length > 0" class="card-footer d-flex px-4 py-3">
                 <div class="mr-auto"></div>
                 <div class="ml-4">
                   <a class="btn btn-primary" (click)="published()">发布</a>
